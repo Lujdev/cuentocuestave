@@ -18,34 +18,30 @@ logger = structlog.get_logger(__name__)
 
 
 async def _fetch_and_persist() -> None:
-    """Async pipeline: fetch both exchange rates and append to the DB."""
+    """Async pipeline: fetch both exchange rates concurrently and append to the DB."""
+
+    results = await asyncio.gather(
+        fetch_bcv_rate(),
+        fetch_monitor_dolar_rate(),
+        return_exceptions=True,
+    )
 
     async with async_session_factory() as session:
         repo = SqlExchangeRateRepository(session)
 
-        # BCV — official rate
-        try:
-            bcv_reading = await fetch_bcv_rate()
-            await repo.append(bcv_reading)
-            logger.info(
-                "exchange_rate_persisted",
-                source="bcv",
-                rate=str(bcv_reading.rate_ves_per_usd),
-            )
-        except ExchangeRateFetchError as exc:
-            logger.error("exchange_rate_fetch_failed", source="bcv", error=str(exc))
-
-        # Monitor Dólar Venezuela — parallel market rate
-        try:
-            monitor_reading = await fetch_monitor_dolar_rate()
-            await repo.append(monitor_reading)
-            logger.info(
-                "exchange_rate_persisted",
-                source="monitor_dolar_ve",
-                rate=str(monitor_reading.rate_ves_per_usd),
-            )
-        except ExchangeRateFetchError as exc:
-            logger.error("exchange_rate_fetch_failed", source="monitor_dolar_ve", error=str(exc))
+        sources = ("bcv", "monitor_dolar_ve")
+        for source, result in zip(sources, results, strict=True):
+            if isinstance(result, ExchangeRateFetchError):
+                logger.warning("exchange_rate_fetch_failed", source=source, error=str(result))
+            elif isinstance(result, BaseException):
+                logger.error("exchange_rate_unexpected_error", source=source, error=str(result))
+            else:
+                await repo.append(result)
+                logger.info(
+                    "exchange_rate_persisted",
+                    source=source,
+                    rate=str(result.rate_ves_per_usd),
+                )
 
         await session.commit()
 

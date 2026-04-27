@@ -16,6 +16,7 @@ dependencies = [
     "structlog>=25.0",
     "openai>=1.60",
     "sentence-transformers>=3.4",
+    "beautifulsoup4>=4.12",
     "httpx>=0.28",
     "tenacity>=9.0",
     "sentry-sdk[fastapi]>=2.20",

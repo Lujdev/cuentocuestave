@@ -1,4 +1,17 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def _normalise_pg_url(url: str) -> str:
+    """Ensure psycopg v3 driver scheme (no psycopg2, no bare postgresql://)."""
+    # Fix explicit psycopg2
+    url = url.replace("postgresql+psycopg2://", "postgresql+psycopg://")
+    url = url.replace("postgres+psycopg2://", "postgresql+psycopg://")
+    # Bare scheme with no explicit driver → SQLAlchemy defaults to psycopg2
+    for bare in ("postgresql://", "postgres://"):
+        if url.startswith(bare):
+            return "postgresql+psycopg://" + url[len(bare) :]
+    return url
 
 
 class Settings(BaseSettings):
@@ -7,6 +20,11 @@ class Settings(BaseSettings):
     # Database
     database_url: str
     database_url_sync: str
+
+    @field_validator("database_url", "database_url_sync", mode="before")
+    @classmethod
+    def normalise_db_url(cls, v: str) -> str:
+        return _normalise_pg_url(v)
 
     # Redis
     redis_url: str = "redis://localhost:6379/0"

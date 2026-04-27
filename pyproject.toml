@@ -69,6 +69,14 @@ plugins = ["pydantic.mypy"]
 asyncio_mode = "auto"
 testpaths = ["packages", "apps"]
 addopts = "--cov --cov-report=term-missing"
+pythonpath = [
+    "packages/domain/src",
+    "packages/application/src",
+    "packages/infrastructure/src",
+    "packages/ml/src",
+    "apps/api/src",
+    "apps/workers/src",
+]
 
 [tool.coverage.run]
 source = ["packages", "apps"]

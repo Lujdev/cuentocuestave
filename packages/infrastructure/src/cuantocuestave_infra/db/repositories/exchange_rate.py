@@ -3,11 +3,14 @@
 from datetime import UTC, timedelta
 from typing import Any
 
+import structlog
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cuantocuestave_infra.db.models import ExchangeRate
 from cuantocuestave_infra.exchange.types import ExchangeRateReading
+
+logger = structlog.get_logger(__name__)
 
 
 class SqlExchangeRateRepository:
@@ -35,7 +38,8 @@ class SqlExchangeRateRepository:
             )
         )
         if existing.scalar_one_or_none() is not None:
-            return  # already have a reading for this source within this minute
+            logger.info("exchange_rate_already_present", source=reading.source)
+            return
 
         row = ExchangeRate(
             source=reading.source,

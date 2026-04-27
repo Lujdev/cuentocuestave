@@ -125,7 +125,7 @@ async def _scrape_async(supermarket_slug: str) -> None:
                     error_summary = {"errors": []}
                 error_summary["errors"].append(f"{raw.external_id}: {exc}")
 
-        status = "success" if errors_count == 0 else ("partial" if items_seen > 0 else "failed")
+        status = "completed" if errors_count == 0 else ("partial" if items_seen > 0 else "failed")
 
         await scrape_run_repo.finish(
             run_id=run.id,
