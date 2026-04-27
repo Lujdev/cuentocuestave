@@ -1,4 +1,4 @@
-.PHONY: help install dev lint typecheck test test-unit test-integration build clean
+.PHONY: help install dev lint typecheck test test-unit test-integration build clean seed-canasta
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -49,6 +49,9 @@ migrate: ## Run Alembic migrations
 
 migrate-new: ## New migration: make migrate-new MSG="description"
 	uv run --package cuantocuestave-infrastructure alembic -c packages/infrastructure/alembic.ini revision --autogenerate -m "$(MSG)"
+
+seed-canasta: ## Seed canasta básica products from data/canasta_basica_seed.yaml
+	uv run python scripts/seed_canasta.py
 
 build-web: ## Build Astro static site
 	pnpm --filter web build
