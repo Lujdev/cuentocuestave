@@ -17,9 +17,8 @@ class Settings(BaseSettings):
     llm_fallback_model: str = "anthropic/claude-haiku-4.5"
     llm_daily_budget_usd: float = 1.0
 
-    # Auth
-    stack_auth_project_id: str = ""
-    stack_auth_secret_server_key: str = ""
+    # Auth (Neon Auth / better-auth)
+    neon_auth_url: str  # e.g. https://ep-xxx.neonauth.region.aws.neon.tech/dbname/auth
     admin_allowed_email: str
 
     # App

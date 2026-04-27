@@ -21,6 +21,10 @@ dependencies = [
     "sentry-sdk[fastapi]>=2.20",
 ]
 
+[tool.uv.sources]
+cuantocuestave-domain = { workspace = true }
+cuantocuestave-application = { workspace = true }
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

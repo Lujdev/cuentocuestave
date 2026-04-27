@@ -12,6 +12,11 @@ dependencies = [
     "periodiq>=0.12",
 ]
 
+[tool.uv.sources]
+cuantocuestave-application = { workspace = true }
+cuantocuestave-infrastructure = { workspace = true }
+cuantocuestave-ml = { workspace = true }
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
