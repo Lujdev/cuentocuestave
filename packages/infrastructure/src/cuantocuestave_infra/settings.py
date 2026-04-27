@@ -3,14 +3,24 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 def _normalise_pg_url(url: str) -> str:
-    """Ensure psycopg v3 driver scheme (no psycopg2, no bare postgresql://)."""
+    """Ensure psycopg v3 driver scheme and SSL for Neon endpoints."""
     # Fix explicit psycopg2
     url = url.replace("postgresql+psycopg2://", "postgresql+psycopg://")
     url = url.replace("postgres+psycopg2://", "postgresql+psycopg://")
     # Bare scheme with no explicit driver → SQLAlchemy defaults to psycopg2
     for bare in ("postgresql://", "postgres://"):
         if url.startswith(bare):
-            return "postgresql+psycopg://" + url[len(bare) :]
+            url = "postgresql+psycopg://" + url[len(bare) :]
+            break
+    # Neon endpoints require SSL + channel binding
+    if "neon.tech" in url:
+        if "sslmode=" not in url:
+            sep = "&" if "?" in url else "?"
+            url += f"{sep}sslmode=require"
+        if "channel_binding=" not in url:
+            url += "&channel_binding=require"
+        # Strip pooler suffix — Neon project has pooler_enabled=false
+        url = url.replace("-pooler.c-", ".c-")
     return url
 
 
