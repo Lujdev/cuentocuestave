@@ -1,0 +1,21 @@
+[project]
+name = "cuantocuestave-ml"
+version = "0.1.0"
+description = "ML pipeline: matching, forecasting, anomaly detection, clustering"
+requires-python = ">=3.12"
+dependencies = [
+    "cuantocuestave-domain",
+    "cuantocuestave-infrastructure",
+    "scikit-learn>=1.6",
+    "prophet>=1.1",
+    "statsmodels>=0.14",
+    "polars>=1.20",
+    "numpy>=2.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cuantocuestave_ml"]

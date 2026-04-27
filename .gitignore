@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.log
+
+# uv
+.uv/
+
+# Node
+node_modules/
+.pnpm-store/
+.next/
+dist/
+.output/
+.vercel/
+*.tsbuildinfo
+
+# Astro
+apps/web/dist/
+apps/web/.astro/
+
+# Vite
+apps/admin/dist/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Secrets
+.env
+.env.local
+.env.*.local
+infra/secrets/*.yaml
+!infra/secrets/.sops.yaml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.override.yml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test cassettes (VCR)
+tests/cassettes/
+**/__cassettes__/
+
+# Model weights / large binaries
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+
+# Neon / DB
+*.sql.bak

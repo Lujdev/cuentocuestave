@@ -1,0 +1,64 @@
+services:
+  api:
+    build:
+      context: ../../
+      dockerfile: infra/docker/api.Dockerfile
+    restart: unless-stopped
+    env_file: ../../.env
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  workers:
+    build:
+      context: ../../
+      dockerfile: infra/docker/workers.Dockerfile
+    restart: unless-stopped
+    env_file: ../../.env
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  scheduler:
+    build:
+      context: ../../
+      dockerfile: infra/docker/workers.Dockerfile
+    restart: unless-stopped
+    env_file: ../../.env
+    command: ["python", "-m", "cuantocuestave_workers.scheduler"]
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ../../
+      dockerfile: infra/docker/web.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:80"
+
+  admin:
+    build:
+      context: ../../
+      dockerfile: infra/docker/admin.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:80"
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --save 60 1
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  redis_data:

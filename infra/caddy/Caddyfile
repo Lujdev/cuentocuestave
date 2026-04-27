@@ -1,0 +1,32 @@
+cuantocuestave.app {
+    # Public site — Astro static
+    handle /api/* {
+        reverse_proxy localhost:8000
+    }
+
+    handle /metrics {
+        respond 403
+    }
+
+    handle /admin/* {
+        reverse_proxy localhost:3001
+    }
+
+    handle {
+        reverse_proxy localhost:3000
+    }
+
+    encode gzip zstd
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+}
+
+# Redirect www → apex
+www.cuantocuestave.app {
+    redir https://cuantocuestave.app{uri} permanent
+}

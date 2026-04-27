@@ -1,0 +1,236 @@
+# Canasta básica cuantocuestave — 30 productos curados
+# Fuente de referencia: CENDAS-FVM (Centro de Documentación y Análisis Social de la FAPUV)
+# Esta lista es propia y no constituye adopción oficial de la canasta CENDAS.
+# Criterio de selección: productos de consumo frecuente, disponibles en catálogos online venezolanos,
+# con variaciones de marca entre Plaza's y Excelsior Gama para validar el pipeline de matching.
+
+version: "1.0"
+date: "2026-04-27"
+
+categories:
+  cereales_y_masas:
+    - slug: harina-pan-1kg
+      display_name: "Harina PAN Precocida Blanca"
+      brand: "P.A.N."
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: arroz-diana-1kg
+      display_name: "Arroz Diana Tipo I"
+      brand: "Diana"
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: pasta-larga-500g
+      display_name: "Pasta Larga (Espagueti)"
+      brand: null  # varía por supermercado
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: avena-3minutos-500g
+      display_name: "Avena en Hojuelas 3 Minutos"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+  aceites_y_grasas:
+    - slug: aceite-vegetal-1l
+      display_name: "Aceite Vegetal Girasol"
+      brand: null
+      canonical_unit: l
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: margarina-mavesa-500g
+      display_name: "Margarina Mavesa"
+      brand: "Mavesa"
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+  lacteos:
+    - slug: leche-en-polvo-completa-400g
+      display_name: "Leche en Polvo Entera"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.4
+      is_basic_basket: true
+
+    - slug: leche-pasteurizada-1l
+      display_name: "Leche Pasteurizada Entera"
+      brand: null
+      canonical_unit: l
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: queso-blanco-duro-500g
+      display_name: "Queso Blanco Duro"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: yogur-natural-1kg
+      display_name: "Yogur Natural Sin Azúcar"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: false
+
+  carnes_y_proteinas:
+    - slug: mortadela-tipo-italiana-500g
+      display_name: "Mortadela Tipo Italiana"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: sardinas-en-lata-170g
+      display_name: "Sardinas en Salsa de Tomate"
+      brand: null
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: atun-en-lata-140g
+      display_name: "Atún Sólido en Aceite"
+      brand: null
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: caraotas-negras-500g
+      display_name: "Caraotas Negras Secas"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: lentejas-500g
+      display_name: "Lentejas"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: false
+
+  azucares:
+    - slug: azucar-blanca-1kg
+      display_name: "Azúcar Blanca Refinada"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: panela-papelón-500g
+      display_name: "Panela (Papelón) Blanca"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+  condimentos_y_salsas:
+    - slug: salsa-de-tomate-400g
+      display_name: "Salsa de Tomate Natural"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.4
+      is_basic_basket: true
+
+    - slug: mayonesa-445g
+      display_name: "Mayonesa"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.445
+      is_basic_basket: false
+
+    - slug: sal-refinada-1kg
+      display_name: "Sal de Mesa Refinada Yodada"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+  higiene_personal:
+    - slug: jabon-de-bano-90g
+      display_name: "Jabón de Baño"
+      brand: null
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: shampoo-400ml
+      display_name: "Shampoo Normal"
+      brand: null
+      canonical_unit: l
+      canonical_pack_size: 0.4
+      is_basic_basket: false
+
+    - slug: pasta-dental-75ml
+      display_name: "Pasta Dental con Flúor"
+      brand: null
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: papel-higienico-4und
+      display_name: "Papel Higiénico (paquete 4 rollos)"
+      brand: null
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+  limpieza_hogar:
+    - slug: detergente-ropa-1kg
+      display_name: "Detergente en Polvo para Ropa"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: lavaplatos-pasta-500g
+      display_name: "Lavaplatos Pasta"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: cloro-1l
+      display_name: "Cloro Blanqueador"
+      brand: null
+      canonical_unit: l
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+  bebidas:
+    - slug: cafe-molido-500g
+      display_name: "Café Molido Tostado"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 0.5
+      is_basic_basket: true
+
+    - slug: jugo-tang-sobres-x15
+      display_name: "Jugo en Polvo (sobres x15)"
+      brand: "Tang"
+      canonical_unit: unidad
+      canonical_pack_size: 1.0
+      is_basic_basket: false
+
+  verduras_y_frutas:
+    - slug: tomate-industrial-1kg
+      display_name: "Tomate Rojo (kg)"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true
+
+    - slug: platano-maduro-kg
+      display_name: "Plátano Maduro (kg)"
+      brand: null
+      canonical_unit: kg
+      canonical_pack_size: 1.0
+      is_basic_basket: true

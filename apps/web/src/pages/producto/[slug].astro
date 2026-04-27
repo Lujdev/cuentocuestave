@@ -1,0 +1,12 @@
+---
+export const prerender = true;
+
+// TODO Fase 3: implement getStaticPaths fetching all published products
+export async function getStaticPaths() {
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+
+<p>Producto: {slug} — coming in Fase 3</p>
